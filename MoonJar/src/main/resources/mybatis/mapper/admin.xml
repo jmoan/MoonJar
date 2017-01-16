@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
 
+	<insert id="uploadPicture" parameterType="string">
+		insert into picture_main (
+			filename
+			,regDate
+		)values(
+			#{filename}
+			,now()
+		)
+	</insert>
+	
+	<select id="getMainPicture" resultType="string">
+		select filename from picture_main where type='0' order by seq desc limit 1
+	</select>
+	
+	<select id="getMainWorks" resultType="string">
+		select filename from picture_main where type='1'
+	</select>
 </mapper>

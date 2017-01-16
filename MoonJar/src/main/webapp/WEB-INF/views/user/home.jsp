@@ -6,21 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="icon" href="/resources/icon/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/resources/css/common.css">
 <script type="text/javascript" src="/resources/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/resources/js/common.js"></script>
 <title>Home</title>
 </head>
 <body>
-	<c:if test="${user == null }">
-	<form action="/login" method="post">
-		id : <input type="text" name="id"><br>
-		pw : <input type="password" name="password"><br>				
-		<button>로그인</button>
-		<input type="button" value="가입하기" onclick="javascript:location.href='/joinForm'">
-	</form>
-	</c:if>
-	<c:if test="${user != null }">
-		${user.name } 님 어서오세요 ^^
-	</c:if>
+	<div id="adminLogin">
+		<div id="mask"></div>
+		<form action="/login" method="post">
+			id : <input type="text" name="id"><br>
+			pw : <input type="password" name="password"><br>				
+			<button>로그인</button>
+		</form>
+	</div>	
+	
+	
 </body>
 </html>

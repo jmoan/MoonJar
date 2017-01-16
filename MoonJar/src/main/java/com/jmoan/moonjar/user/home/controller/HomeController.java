@@ -45,36 +45,15 @@ public class HomeController {
 			request.getSession().setAttribute("user", resultDTO);
 		}
 		
+		ModelAndView mv = new ModelAndView("/admin/index");	
+		return mv;
+	}
+	
+	@RequestMapping(value = "/logout")
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response, UserDTO dto) {
+		
+		request.getSession().invalidate();		
 		ModelAndView mv = new ModelAndView("/user/home");	
-		return mv;
-	}
-	
-	@RequestMapping(value = "/joinForm")
-	public ModelAndView joinForm(HttpServletRequest request, HttpServletResponse response) {
-		
-		ModelAndView mv = new ModelAndView("/user/join");
-		return mv;
-	}
-	
-	@RequestMapping(value = "/checkId")
-	@ResponseBody
-	public String checkId(HttpServletRequest request, HttpServletResponse response, UserDTO dto) throws IOException, ParseException {
-				
-		String result = "failure";
-		
-		ModelAndView mv = new ModelAndView("jsonView");
-		
-		if(service.selectUser(dto) == null){
-			result = "success";
-		}
-		
-		return result;
-	}
-	@RequestMapping(value = "/join")
-	public ModelAndView join(HttpServletRequest request, HttpServletResponse response, UserDTO dto) {
-		
-		service.joinUser(dto);
-		ModelAndView mv = new ModelAndView("/user/home");		
 		return mv;
 	}
 }
