@@ -2,6 +2,7 @@ package com.jmoan.moonjar.admin.home.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +26,7 @@ public class AdminController {
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	private final String localPath = "C:/Users/nabiesoft/git/MoonJar/MoonJar/src/main/webapp/uploads/";
 	private final String serverPath = "/home/hosting_users/choding2da/tomcat/webapps/uploads";
-	private final String path = serverPath; 
+	private final String path = localPath; 
 	@Inject
 	AdminHomeService service;
 	
@@ -33,6 +34,7 @@ public class AdminController {
 	@ResponseBody
 	public String uploadPicture(MultipartHttpServletRequest  request, HttpServletResponse response) throws IllegalStateException, IOException {		
 		String fileName = null;
+		request.setCharacterEncoding("utf-8");
 		MultipartFile file = request.getFile("uploadPicture");
 		if(file != null){
 			fileName = file.getOriginalFilename();
@@ -49,26 +51,24 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/uploadWorks")
 	@ResponseBody
-	public List<String> uploadWorks(MultipartHttpServletRequest  request, HttpServletResponse response) throws IllegalStateException, IOException {		
+	public String uploadWorks(MultipartHttpServletRequest  request, HttpServletResponse response) throws IllegalStateException, IOException {		
 		String fileName = null;
-		Iterator<String> it = request.getFileNames();
+		request.setCharacterEncoding("utf-8");		
 		List<String> fileNames = new ArrayList<String>();
-		while(it.hasNext()){
-			fileName = it.next();
-			fileNames.add(fileName);
-			MultipartFile file = request.getFile("fileName");  
-			if(file != null){
-				fileName = file.getOriginalFilename();
-				if(!new File(path+"/works/").exists()){
-					new File(path+"/works/").mkdirs();
-				}
+		List<MultipartFile> files = request.getFiles("uploadWorks[]");
+		
+		if(!new File(path+"/works/").exists()){
+			new File(path+"/works/").mkdirs();
+		}
 				
-				file.transferTo(new File(path+"/works/"+fileName));			
-				service.uploadPicture(fileName);
-				
+		for(MultipartFile mf : files){
+			if(mf != null){
+				fileName = mf.getOriginalFilename();				
+				mf.transferTo(new File(path+"/works/"+fileName));
+				service.uploadWorks(fileName);
 			}
 		}
 		
-		return fileNames;
+		return fileNames.toString();
 	}	
 }

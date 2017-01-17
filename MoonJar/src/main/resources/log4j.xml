@@ -34,7 +34,7 @@
 
 	<appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
 		<!-- ref.) attr : FileAppender + DatePattern -->
-		<param name="File" value="/logs/moonjar/moonjar.log" />
+		<param name="File" value="/home/hosting_users/choding2da/tomcat/logs/moonjar/moonjar.log" />
 		<param name="Append" value="true" />
 		<param name="encoding" value="UTF-8" />
 		

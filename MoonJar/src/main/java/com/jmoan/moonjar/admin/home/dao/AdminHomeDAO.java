@@ -10,4 +10,6 @@ public interface AdminHomeDAO {
 
 	List<String> getMainWorks();
 
+	void uploadWorks(String fileName);
+
 }

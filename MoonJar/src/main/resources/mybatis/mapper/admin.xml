@@ -6,9 +6,23 @@
 		insert into picture_main (
 			filename
 			,regDate
+			,type
 		)values(
 			#{filename}
 			,now()
+			,0
+		)
+	</insert>
+	
+	<insert id="uploadWorks" parameterType="string">
+		insert into picture_main (
+			filename
+			,regDate
+			,type
+		)values(
+			#{filename}
+			,now()
+			,1
 		)
 	</insert>
 	

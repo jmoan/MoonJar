@@ -33,6 +33,11 @@ a{
 	height:130px;
 	margin: 0 auto;
 }
+
 #uploadPicture{display:none;}
 
 #face-picture > img{width:100%;}
+
+#uploadWorks{display:none;}
+
+#work-pictures {float: left;}

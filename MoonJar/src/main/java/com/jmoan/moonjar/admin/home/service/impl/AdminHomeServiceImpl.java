@@ -34,4 +34,10 @@ public class AdminHomeServiceImpl implements AdminHomeService{
 		return dao.getMainWorks();
 	}
 
+	@Override
+	public void uploadWorks(String fileName) {
+		// TODO Auto-generated method stub
+		dao.uploadWorks(fileName);
+	}
+
 }

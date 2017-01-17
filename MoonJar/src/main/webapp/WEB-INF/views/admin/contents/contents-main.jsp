@@ -1,8 +1,9 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 
 <script type="text/javascript" src="/resources/js/fileupload.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.form.js"></script>
 
 <div class="container-fluid">
 	
@@ -23,11 +24,15 @@
                  </div>
                  <div class="panel-body">
                      <div id="face-picture">
-                     	<img src="/uploads/picture/${fileName }">
+                     	<c:if test="${fileName != null }">
+                     		<img src="/uploads/picture/${fileName }">
+                     	</c:if>
                      </div>
                      <div class="text-right">
-                     	<input type="file" name="uploadPicture" id="uploadPicture"/>
-                        <a id="picture" class="picture">사진올리기 <i class="fa fa-arrow-circle-right"></i></a>
+                     	<form>
+                     		<input type="file" name="uploadPicture" id="uploadPicture"/>
+                     	</form>
+                        <a id="picture">사진올리기 <i class="fa fa-arrow-circle-right"></i></a>
                      </div>
                  </div>
              </div>
@@ -41,14 +46,15 @@
                  </div>
                  <div class="panel-body">
                  	 <c:forEach var="pic" items="${workFiles }">
-	                     <div class="work-pictures">
-	                     	<img src="/uploads/work/${pic }">
-	                     	<script>console.log('${pic }');</script>
+	                     <div class="work-pictures" class="col-lg-2">
+	                     	<img src="/uploads/works/${pic }">
 	                     </div>
                      </c:forEach>
                      <div class="text-right">
-                     	<input type="file" name="uploadPicture" id="uploadPicture"/>
-                        <a id="picture" class="picture">사진올리기 <i class="fa fa-arrow-circle-right"></i></a>
+                     	<form>
+                     		<input type="file" multiple="multiple" name="uploadWorks[]" id="uploadWorks"/>
+                     	</form>
+                        <a id="works">사진올리기 <i class="fa fa-arrow-circle-right"></i></a>
                      </div>
                  </div>
              </div>

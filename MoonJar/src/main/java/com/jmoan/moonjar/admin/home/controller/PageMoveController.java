@@ -1,5 +1,8 @@
 package com.jmoan.moonjar.admin.home.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -39,13 +42,24 @@ public class PageMoveController {
 	}
 	
 	@RequestMapping(value = "/admin/contents-main")
-	public ModelAndView adminContentsMain(HttpServletRequest request, HttpServletResponse response, UserDTO dto) {
+	public ModelAndView adminContentsMain(HttpServletRequest request, HttpServletResponse response, UserDTO dto) throws UnsupportedEncodingException {
 		String fileName = service.getMainPicture();
 		List<String> workFiles = service.getMainWorks();
+		List<String> resultFiles = new ArrayList<String>();
+		
+		for(String s : workFiles){
+			//resultFiles.add(URLEncoder.encode(s,"UTF-8"));
+			resultFiles.add(s);
+		}
 		
 		ModelAndView mv = new ModelAndView("/admin/contents/contents-main");
+		
+		/*if(fileName != null){
+			fileName = URLEncoder.encode(fileName,"UTF-8");
+		}*/
+		
 		mv.addObject("fileName", fileName);
-		mv.addObject("workFiles",workFiles);
+		mv.addObject("workFiles",resultFiles);
 		return mv;
 	}
 	

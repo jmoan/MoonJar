@@ -32,5 +32,11 @@ public class AdminHomeDAOImpl implements AdminHomeDAO{
 		// TODO Auto-generated method stub
 		return sessionTemplate.selectList("admin.getMainWorks");
 	}
+
+	@Override
+	public void uploadWorks(String fileName) {
+		// TODO Auto-generated method stub
+		sessionTemplate.insert("admin.uploadWorks",fileName);
+	}
 	
 }

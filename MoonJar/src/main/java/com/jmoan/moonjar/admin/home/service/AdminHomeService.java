@@ -10,4 +10,6 @@ public interface AdminHomeService {
 
 	List<String> getMainWorks();
 
+	void uploadWorks(String fileName);
+
 }
